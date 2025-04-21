@@ -26,9 +26,11 @@ on:
     #     default: false
     #     type: boolean
 
-# permissions:
-#   id-token: write
-#   contents: read
+# The error occurs because the `id-token: write` permission is not enabled in the workflow.
+# This permission is required for OIDC-based authentication when using the `Azure/login` action.
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
 # # Build & Push docker image to Docker Hub
