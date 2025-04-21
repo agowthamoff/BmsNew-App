@@ -84,8 +84,8 @@ jobs:
       
       - name: Docker Build
         run: |
-          docker build -t kcmchandramoulli/bookmyshow:test2 bookmyshow-app
+          docker build -t kcmchandramoulli/bookmyshow:test3 bookmyshow-app
 
       - name: Docker Push
         run: |
-          docker push kcmchandramoulli/bookmyshow:test2
+          docker push kcmchandramoulli/bookmyshow:test3
