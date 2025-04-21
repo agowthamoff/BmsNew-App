@@ -24,7 +24,7 @@ variable "location" {
   default     = "Central India"
 }
 
-variable "resource-group_name" {
+variable "resource_group_name" {
   description = "Default Resource Group name"
   type        = string
   # default     = <typre of script>-<what need to be created at the end>-<project name>-<Kind of resource>
