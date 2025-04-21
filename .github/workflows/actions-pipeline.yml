@@ -28,6 +28,7 @@ on:
 
 # The error occurs because the `id-token: write` permission is not enabled in the workflow.
 # This permission is required for OIDC-based authentication when using the `Azure/login` action.
+# Generally we face this error when we are using the `Azure/login` action in our workflow for deploying an application in AKS
 permissions:
   id-token: write
   contents: read
@@ -97,6 +98,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    # Need to provide Federated Identity credentials point to this particular repo & branch for OIDC-based authentication.
     - name: Azure Login
       uses: Azure/login@v2.2.0
       with:
