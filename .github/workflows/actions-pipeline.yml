@@ -1,18 +1,6 @@
 name: End to End CI/CD for Book My Show Application
 
 on:
-#   push:
-#     branches:
-#       - "master"
-#       - "main"
-#       - "task/**"
-#   pull_request:
-#     branches:
-#       - "master"
-#       - "main"
-#       - "task/**"
-
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
@@ -120,13 +108,6 @@ jobs:
           name: Trivy-Docker-image-report
           path: image-report.html
 
-      - name: Display Trivy Image Scan Report in Summary
-        run: |
-          echo "### Trivy Image Scan Report" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          cat image-report.html >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-
 # Create AKS with terraform
   iac-aks-creation:
     runs-on: ubuntu-latest
@@ -189,15 +170,10 @@ jobs:
       uses: Azure/aks-set-context@v3
       with:
         # Resource Group Name
-        resource-group: tf-aks-bms-rg
+        resource-group: ${{ github.event.inputs.Resource_group_name }}
         # AKS Cluster Name
-        cluster-name: tf-bms-aks
-        # # AKS Cluster Subscription
-        # subscription: # optional
-        # # Get cluster admin credentials. Values: true or false
-        # admin: # optional
-        # # Enables kubelogin for non-admin user scenario. Values: true or false
-        # use-kubelogin: # optional
+        cluster-name: ${{ github.event.inputs.AKS_Cluster_Name }}
+
 
     - name: Create secret in Kubernetes cluster
       uses: Azure/k8s-create-secret@v4.0
@@ -210,8 +186,8 @@ jobs:
         secret-name: docker-image-pull-secret
         # Container Registry URL
         container-registry-url: https://index.docker.io/v1/ # optional
-        container-registry-username: ${{ secrets.DOCKERHUB_USERNAME }} #${{ secrets.ACR_USERNAME }}  #${{ vars.DOCKERHUB_USERNAME }} # optional
-        container-registry-password: ${{ secrets.DOCKERHUB_PASSWORD }} #${{ secrets.ACR_PASSWORD }}  #${{ secrets.DOCKERHUB_TOKEN }} # optional
+        container-registry-username: ${{ secrets.DOCKERHUB_USERNAME }}
+        container-registry-password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Set up kubectl
       uses: azure/setup-kubectl@v4
