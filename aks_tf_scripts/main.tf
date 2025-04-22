@@ -43,14 +43,3 @@ resource "azurerm_network_security_group" "az-aks-nsg" {
     destination_address_prefix = "*"
   }
 }
-
-output "client_certificate" {
-  value     = azurerm_kubernetes_cluster.az-k8s-cluster.kube_config[0].client_certificate
-  sensitive = true
-}
-
-output "kube_config" {
-  value = azurerm_kubernetes_cluster.az-k8s-cluster.kube_config_raw
-
-  sensitive = true
-}
