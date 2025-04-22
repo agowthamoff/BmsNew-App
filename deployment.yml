@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: bms-container
-        image: kcmchandramoulli/bookmyshow:test3  # Replace with your Docker image
+        image: <DOCKER_IMAGE>  # Replace dynamically
         ports:
         - containerPort: 3000  # Replace with the port your app runs on
 

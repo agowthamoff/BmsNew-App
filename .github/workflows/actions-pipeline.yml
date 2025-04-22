@@ -198,6 +198,6 @@ jobs:
       uses: Azure/k8s-deploy@v4.9
       with:
         manifests: deployment.yml
-        images: kcmchandramoulli/bookmyshow:test3
+        images: ${{ github.event.inputs.Docker_Image_Name }}
         imagepullsecrets: docker-image-pull-secret
         action: deploy
