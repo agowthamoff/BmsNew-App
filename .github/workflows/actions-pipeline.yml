@@ -194,10 +194,15 @@ jobs:
       with:
         version: latest
 
+    - name: Replace Image in Deployment File
+      run: |
+        export DOCKER_IMAGE=${{ github.event.inputs.Docker_Image_Name }}
+        envsubst < deployment.yml > deployment-processed.yml
+
     - name: Deploy to Kubernetes cluster
       uses: Azure/k8s-deploy@v4.9
       with:
-        manifests: deployment.yml
+        manifests: deployment-processed.yml
         images: ${{ github.event.inputs.Docker_Image_Name }}
         imagepullsecrets: docker-image-pull-secret
         action: deploy

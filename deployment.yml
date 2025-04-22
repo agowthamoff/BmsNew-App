@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: bms-container
-        image: <DOCKER_IMAGE>  # Replace dynamically
+        image: ${DOCKER_IMAGE}  # Placeholder for dynamic replacement
         ports:
         - containerPort: 3000  # Replace with the port your app runs on
 
