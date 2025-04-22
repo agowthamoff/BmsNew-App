@@ -27,27 +27,29 @@ variable "location" {
 variable "resource_group_name" {
   description = "Default Resource Group name"
   type        = string
-  # default     = <typre of script>-<what need to be created at the end>-<project name>-<Kind of resource>
   default     = "tf-aks-bms-rg"
 }
 
 variable "aks_cluster_name" {
   description = "Default AKS cluster name"
   type        = string
-  # default     = <typre of script>-<what need to be created at the end>-<project name>-<Kind of resource>
   default     = "tf-bms-aks"
 }
 
 variable "dns_prefix_name" {
   description = "Default DNS prefix name"
   type        = string
-  # default     = <typre of script>-<what need to be created at the end>-<project name>-<Kind of resource>
   default     = "tf-bms-aks-dns"
 }
 
 variable "node_size_name" {
   description = "Default Node size name"
   type        = string
-  # default     = <typre of script>-<what need to be created at the end>-<project name>-<Kind of resource>
   default     = "Standard_D4ds_v5"
+}
+
+variable "nsg_name" {
+  description = "Default NSG name"
+  type        = string
+  default     = "tf-aks-nsg"
 }

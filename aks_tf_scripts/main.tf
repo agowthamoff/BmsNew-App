@@ -25,6 +25,25 @@ resource "azurerm_kubernetes_cluster" "az-k8s-cluster" {
   }
 }
 
+resource "azurerm_network_security_group" "az-aks-nsg" {
+  name                = var.nsg_name
+  resource_group_name = azurerm_resource_group.az-aks-rg.name
+  location            = azurerm_resource_group.az-aks-rg.location
+
+
+  security_rule {
+    name                       = "Allow-HTTP"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3000"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
 output "client_certificate" {
   value     = azurerm_kubernetes_cluster.az-k8s-cluster.kube_config[0].client_certificate
   sensitive = true
